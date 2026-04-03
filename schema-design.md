@@ -28,6 +28,7 @@ CREATE TABLE Doctor (
   experience INT,
   password VARCHAR(255)
 );
+
 ### 💠 Patient Table
 CREATE TABLE Patient (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -37,6 +38,7 @@ CREATE TABLE Patient (
   gender VARCHAR(10),
   password VARCHAR(255)
 );
+
 ### 💠 Appointment Table
 CREATE TABLE Appointment (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -48,6 +50,7 @@ CREATE TABLE Appointment (
   FOREIGN KEY (doctor_id) REFERENCES Doctor(id),
   FOREIGN KEY (patient_id) REFERENCES Patient(id)
 );
+
 ### 💠 Prescription Table
 CREATE TABLE Prescription (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -58,6 +61,7 @@ CREATE TABLE Prescription (
   notes TEXT,
   FOREIGN KEY (appointment_id) REFERENCES Appointment(id)
 );
+
 ## 3. Table Relationships
 Table	Relationship	Type
 Doctor → Appointment	One Doctor has many Appointments	1 → N
@@ -65,6 +69,7 @@ Patient → Appointment	One Patient has many Appointments	1 → N
 Appointment → Prescription	One Appointment has one Prescription	1 → 1
 Doctor → Prescription	One Doctor can issue many Prescriptions	1 → N
 Patient → Prescription	One Patient can have many Prescriptions	1 → N
+
 ## 4. Stored Procedures
 ### 📌 Get Daily Appointment Report
 CREATE PROCEDURE GetDailyAppointmentReportByDoctor()
@@ -74,6 +79,7 @@ BEGIN
   WHERE date = CURDATE()
   GROUP BY doctor_id;
 END;
+
 ### 📌 Doctor With Most Patients (Monthly)
 CREATE PROCEDURE GetDoctorWithMostPatientsByMonth()
 BEGIN
@@ -84,7 +90,9 @@ BEGIN
   ORDER BY total DESC
   LIMIT 1;
 END;
+
 ### 📌 Doctor With Most Patients (Yearly)
+
 CREATE PROCEDURE GetDoctorWithMostPatientsByYear()
 BEGIN
   SELECT doctor_id, COUNT(DISTINCT patient_id) AS total
@@ -94,6 +102,7 @@ BEGIN
   ORDER BY total DESC
   LIMIT 1;
 END;
+
 ## 5. Summary
 
 This schema supports all required project features:
