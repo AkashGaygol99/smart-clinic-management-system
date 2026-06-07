@@ -1,3 +1,5 @@
-FROM openjdk:21
-COPY target/smartclinic.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM openjdk:17
+
+COPY target/smart-clinic.jar app.jar
+
+ENTRYPOINT ["java","-jar","app.jar"]
